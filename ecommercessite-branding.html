@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Store</title>
+    <link rel="icon" href="02.jpeg" type="x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .cart-item {
+            transition: all 0.3s ease;
+        }
+        .cart-item:hover {
+            background-color: #f8fafc;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3fc2ab08-9d2c-4098-81cc-b194a601d8a3.png" alt="Company logo showing abstract geometric shapes in blue and green tones" class="h-10" />
+                <h1 class="ml-4 text-2xl font-bold text-gray-800">ShopEase</h1>
+            </div>
+            <div id="cart-icon" class="flex items-center cursor-pointer relative">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+                <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-6 w-6 flex items-center justify-center">0</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative">
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c55639a9-9e84-46e3-af4d-1d81fee4bfb6.png" alt="Wide banner showing diverse products arranged aesthetically with soft focus background" class="w-full h-64 object-cover" />
+        <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
+            <h2 class="text-3xl md:text-5xl font-bold text-white">Premium Products, Inspired Living</h2>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 py-8">
+        <!-- Categories -->
+        <div class="flex overflow-x-auto pb-4 mb-8 scrollbar-hide">
+        <li><button data-filter="*" class="px-4 py-2 mr-2 rounded-full bg-blue-600 text-white whitespace-nowrap">All Products</button></li>
+        <li><button data-filter=".filter-Electronics" class="px-4 py-2 mr-2 rounded-full bg-gray-200 whitespace-nowrap">Electronics</button></li>
+        <li><button data-filter=".filter-Clothing" class="px-4 py-2 mr-2 rounded-full bg-gray-200 whitespace-nowrap">Clothing</button></li>
+        <li><button data-filter=".filter-Home & Kitchen" class="px-4 py-2 mr-2 rounded-full bg-gray-200 whitespace-nowrap">Home & Kitchen</button></li>
+        <li><button data-filter=".filter-Beauty" class="px-4 py-2 mr-2 rounded-full bg-gray-200 whitespace-nowrap">Beauty</button></li>
+        </div>
+
+        <!-- Product Grid -->
+        <h2 class="text-2xl font-bold mb-6 text-gray-800">Featured Products</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- Product 1 -->
+            <div class="product-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
+                <div class="relative pb-3/4">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5a7f89b3-b725-4396-b522-18e7d0c1b1c5.png" alt="Wireless headphones with black sleek design and comfortable ear cushions" class="w-full h-48 object-cover" />
+                    <div class="absolute top-2 right-2 bg-yellow-500 text-white text-xs px-2 py-1 rounded-full">Popular</div>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold text-lg mb-1">Premium Wireless Headphones</h3>
+                    <p class="text-gray-600 text-sm mb-2">Noise cancelling with 30hr battery</p>
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold text-gray-800">₹1250.99</span>
+                        <button onclick="addToCart('Premium Wireless Headphones', 199.99, 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e376b041-8573-40c6-948f-1ee48f60f1b6.png')" class="bg-blue-600 text-white px-3 py-1 rounded-md text-sm hover:bg-blue-700 transition">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5ba43f50-1beb-478b-8dd1-90ec73963587.png" alt="Modern smartwatch with fitness tracking capabilities displayed on wrist showing health metrics" class="w-full h-48 object-cover" />
+                <div class="p-4">
+                    <h3 class="font-semibold text-lg mb-1">Smart Fitness Watch</h3>
+                    <p class="text-gray-600 text-sm mb-2">Heart rate monitor & waterproof</p>
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold text-gray-800">₹1350.99</span>
+                        <button onclick="addToCart('Smart Fitness Watch', 1350.99, 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/25160b27-4817-4a94-9aff-eae235e26910.png?text=Smart+Fitness+Watch')" class="bg-blue-600 text-white px-3 py-1 rounded-md text-sm hover:bg-blue-700 transition">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/9076527d-f09c-408d-a756-9d660d5742c4.png" alt="Organic cotton t-shirt in multiple color options folded neatly" class="w-full h-48 object-cover" />
+                <div class="p-4">
+                    <h3 class="font-semibold text-lg mb-1">Organic Cotton T-Shirt</h3>
+                    <p class="text-gray-600 text-sm mb-2">Breathable fabric, multiple colors</p>
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold text-gray-800">₹950.99</span>
+                        <button onclick="addToCart('Organic Cotton T-Shirt', 950.99, 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/20ea9c22-5217-4f7a-b891-ad9038ecd603.png')" class="bg-blue-600 text-white px-3 py-1 rounded-md text-sm hover:bg-blue-700 transition">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
+                <div class="relative pb-3/4">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/2b1dfb5d-c99a-48ca-b9eb-9a06b1230938.png" alt="Stainless steel blender with glass pitcher for smoothies and food processing" class="w-full h-48 object-cover" />
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold text-lg mb-1">Professional Blender</h3>
+                    <p class="text-gray-600 text-sm mb-2">High power stainless steel</p>
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold text-gray-800">₹1600.99</span>
+                        <button onclick="addToCart('Professional Blender', 1600.99, 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e7c0e329-c652-4f04-8e9b-de0db7ce7569.png')" class="bg-blue-600 text-white px-3 py-1 rounded-md text-sm hover:bg-blue-700 transition">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 5 -->
+            <div class="product-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/50d54262-c3a2-4353-a218-4b6b50dfdfab.png" alt="Luxury skincare set in elegant packaging with jars and bottles" class="w-full h-48 object-cover" />
+                <div class="p-4">
+                    <h3 class="font-semibold text-lg mb-1">Skincare Essentials Kit</h3>
+                    <p class="text-gray-600 text-sm mb-2">Complete daily routine</p>
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold text-gray-800">₹1599.99</span>
+                        <button onclick="addToCart('Skincare Essentials Kit', 1599.99, 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/50d54262-c3a2-4353-a218-4b6b50dfdfab.png')" class="bg-blue-600 text-white px-3 py-1 rounded-md text-sm hover:bg-blue-700 transition">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 6 -->
+            <div class="product-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
+                <img src="01.jpeg" alt="Modern wireless charging pad with LED indicators and sleek aluminum finish" class="w-full h-48 object-cover" />
+                <div class="p-4">
+                    <h3 class="font-semibold text-lg mb-1">Fast Wireless Charger</h3>
+                    <p class="text-gray-600 text-sm mb-2">Qi-certified 15W charging</p>
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold text-gray-800">₹999.99</span>
+                        <button onclick="addToCart('Fast Wireless Charger', 999.99, 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4e5a1e69-5ccc-4041-b5f2-2ff8b61c8b81.png')" class="bg-blue-600 text-white px-3 py-1 rounded-md text-sm hover:bg-blue-700 transition">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Shopping Cart Sidebar -->
+    <div id="cart-sidebar" class="fixed inset-y-0 right-0 w-96 bg-white shadow-lg transform translate-x-full transition-transform duration-300 z-50 overflow-y-auto">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-gray-800">Your Shopping Cart</h2>
+                <button id="close-cart" class="text-gray-500 hover:text-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <div id="cart-items" class="border-t border-gray-200">
+                <!-- Cart items will be added here dynamically -->
+            </div>
+
+            <div class="border-t border-gray-200 pt-4 mt-4">
+                <div class="flex justify-between mb-2">
+                    <span class="text-gray-600">Subtotal:</span>
+                    <span id="cart-subtotal" class="font-semibold">₹0.00</span>
+                </div>
+                <div class="flex justify-between mb-4">
+                    <span class="text-gray-600">Shipping:</span>
+                    <span class="font-semibold">Free</span>
+                </div>
+                <div class="flex justify-between text-lg font-bold">
+                    <span>Total:</span>
+                    <span id="cart-total">₹0.00</span>
+                </div>
+                <button id="checkout-btn" class="w-full bg-blue-600 text-white py-3 rounded-md mt-6 hover:bg-blue-700 transition">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+    <div id="cart-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden"></div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12 mt-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">ShopEase</h3>
+                    <p class="text-gray-400">Bringing you quality products since 2023</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="ecommercessite-branding.html" class="text-gray-400 hover:text-white transition">Products</a></li>
+                        <li><a href="ecommercessite-branding.html" class="text-gray-400 hover:text-white transition">About Us</a></li>
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Customer Service</h3>
+                    <ul class="space-y-2">
+                        <li><a href="FAQs.html" class="text-gray-400 hover:text-white transition">FAQs</a></li>
+                        <li><a href="shippingpolicy.html" class="text-gray-400 hover:text-white transition">Shipping Policy</a></li>
+                        <li><a href="Return.html" class="text-gray-400 hover:text-white transition">Returns</a></li>
+                        <li><a href="privacypolicy.html" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Stay Connected</h3>
+                    <div class="flex space-x-4">
+                        <a href="#"><img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/bf7bae5a-a02b-4179-8a85-e8f89543c838.png" alt="Facebook icon" class="h-10 w-10 rounded-full" /></a>
+                        <a href="https://www.instagram.com/mr_shankar15/?hl=en"><img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/eae4cdcd-2d04-48a6-bb68-0c2e1e86ce1b.png" alt="Instagram icon" class="h-10 w-10 rounded-full" /></a>
+                        <a href="https://www.linkedin.com/in/uma-shankar-779340336/"><img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/30426972-2d5e-48d7-8724-5fe1ffa5c854.png" alt="linkedin icon" class="h-10 w-10 rounded-full" /></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Cart functionality
+        let cart = [];
+        const cartSidebar = document.getElementById('cart-sidebar');
+        const cartOverlay = document.getElementById('cart-overlay');
+        const cartItemsContainer = document.getElementById('cart-items');
+        const cartSubtotal = document.getElementById('cart-subtotal');
+        const cartTotal = document.getElementById('cart-total');
+        const cartCount = document.getElementById('cart-count');
+
+        // Toggle cart sidebar
+        document.getElementById('cart-icon').addEventListener('click', () => {
+            cartSidebar.classList.remove('translate-x-full');
+            cartOverlay.classList.remove('hidden');
+            updateCartUI();
+        });
+
+        document.getElementById('close-cart').addEventListener('click', () => {
+            cartSidebar.classList.add('translate-x-full');
+            cartOverlay.classList.add('hidden');
+        });
+
+        cartOverlay.addEventListener('click', () => {
+            cartSidebar.classList.add('translate-x-full');
+            cartOverlay.classList.add('hidden');
+        });
+
+        // Add to cart function
+        function addToCart(name, price, image) {
+            const existingItem = cart.find(item => item.name === name);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    name,
+                    price,
+                    image,
+                    quantity: 1
+                });
+            }
+            
+            updateCartUI();
+            showAddToCartToast(name);
+        }
+
+        // Update cart quantity
+        function updateCartItem(name, quantity) {
+            const item = cart.find(item => item.name === name);
+            if (item) {
+                item.quantity = quantity;
+                if (item.quantity <= 0) {
+                    cart = cart.filter(item => item.name !== name);
+                }
+                updateCartUI();
+            }
+        }
+
+        // Update cart UI
+        function updateCartUI() {
+            // Update cart count
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCount.textContent = totalItems;
+            
+            // Update cart items list
+            cartItemsContainer.innerHTML = '';
+            
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p class="text-gray-500 py-8 text-center">Your cart is empty</p>';
+                cartSubtotal.textContent = '₹0.00';
+                cartTotal.textContent = '₹0.00';
+                return;
+            }
+            
+            let subtotal = 0;
+            
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                subtotal += itemTotal;
+                
+                const cartItemElement = document.createElement('div');
+                cartItemElement.className = 'cart-item py-4 border-b border-gray-200 flex';
+                cartItemElement.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" class="w-20 h-20 object-cover rounded" />
+                    <div class="ml-4 flex-1">
+                        <h3 class="font-medium">${item.name}</h3>
+                        <p class="text-gray-600 text-sm">$${item.price.toFixed(2)}</p>
+                        <div class="flex items-center mt-2">
+                            <button onclick="updateCartItem('${item.name}', ${item.quantity - 1})" class="text-gray-500 hover:text-gray-700">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z" clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                            <span class="mx-2">${item.quantity}</span>
+                            <button onclick="updateCartItem('${item.name}', ${item.quantity + 1})" class="text-gray-500 hover:text-gray-700">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex flex-col justify-between items-end">
+                        <p class="font-semibold">$${itemTotal.toFixed(2)}</p>
+                        <button onclick="updateCartItem('${item.name}', 0)" class="text-red-500 hover:text-red-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                    </div>
+                `;
+                cartItemsContainer.appendChild(cartItemElement);
+            });
+            
+            // Update totals
+            cartSubtotal.textContent = `$${subtotal.toFixed(2)}`;
+            cartTotal.textContent = `$${subtotal.toFixed(2)}`;
+        }
+
+        // Show add to cart toast
+        function showAddToCartToast(name) {
+            const toast = document.createElement('div');
+            toast.className = 'fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded-md shadow-lg flex items-center';
+            toast.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                ${name} added to cart
+            `;
+            
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'transition-opacity', 'duration-300');
+                setTimeout(() => {
+                    toast.remove();
+                }, 300);
+            }, 2000);
+        }
+
+        // Checkout button
+        document.getElementById('checkout-btn').addEventListener('click', () => {
+            alert('Proceeding to checkout with ' + cart.reduce((sum, item) => sum + item.quantity, 0) + ' items. Total: ₹' + 
+                  cart.reduce((sum, item) => sum + (item.price * item.quantity), 0).toFixed(2));
+            // In a real application, you would redirect to a checkout page here
+        });
+    </script>
+</body>
+</html>
+
